@@ -1,0 +1,16 @@
+{
+  "name": "damoDealsV2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Damokless/damoDealsV2.git",
+  "author": "Damokless <damokless@protonmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.28.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
+}
