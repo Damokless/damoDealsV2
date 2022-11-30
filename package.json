@@ -6,7 +6,8 @@
   "type": "module",
   "dependencies": {
     "discord.js": "^14.6.0",
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "sqlite": "^4.1.2"
   },
   "devDependencies": {
     "eslint": "^8.28.0",
