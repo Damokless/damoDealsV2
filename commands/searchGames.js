@@ -1,7 +1,7 @@
 import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
-import updateConfigFile from './updateConfigFile.js';
+import updateConfigFile from '../tools/updateConfigFile.js';
 
 // open DB
 const db = await open({
