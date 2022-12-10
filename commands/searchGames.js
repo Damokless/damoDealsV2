@@ -24,7 +24,7 @@ function sendEmbed(deal, interaction) {
     .addFields(
       { name: '\u200B', value: '\u200B' },
       { name: 'Instructions', value: deal.instructions },
-      { name: 'Type', value: deal.type, inline: true },
+      { name: 'Type', value: deal.platforms, inline: true },
       { name: 'Prix initial', value: deal.worth, inline: true },
     )
     .setImage(deal.image)
