@@ -49,7 +49,6 @@ const searchGames = {
     /* Looping through the deals and checking if the deal was published after the last update. */
     // eslint-disable-next-line no-restricted-syntax
     for (const deal of deals) {
-      console.log(dlcLastUpdate);
       if (deal.published_date > dlcLastUpdate.dlcLastUpdate || dlcLastUpdate.dlcLastUpdate === null) {
         sendEmbed(deal, interaction);
       }
