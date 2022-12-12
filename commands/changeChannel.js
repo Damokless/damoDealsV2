@@ -20,7 +20,8 @@ const changeChannel = {
     if (interaction.user.id === interaction.guild.ownerId) {
       await updateConfigFile(interaction.options.getString('category'), interaction.options.getString('channelid'));
       await interaction.reply(`${interaction.options.getString('category')} set to ${interaction.options.getString('channelid')}`);
-    } else {
+    }
+    else {
       await interaction.reply('You don\'t have the permission');
     }
   },
