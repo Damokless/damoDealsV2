@@ -34,7 +34,7 @@ function sendEmbed(deal, interaction) {
   /* It's checking if the dlcChannelID is set. If yes,it will send the embed to the
   channel set in the config.db. If it's not, it will send the embed to the channel where the command
   was executed. */
-  dlcChannelID ? interaction.client.channels.cache.get(dlcChannelID).send({ embeds: [exampleEmbed] }) : interaction.channel.send({ embeds: [exampleEmbed] });
+  dlcChannelID.dlcChannelID !== null ? interaction.client.channels.cache.get(dlcChannelID.dlcChannelID).send({ embeds: [exampleEmbed] }) : interaction.channel.send({ embeds: [exampleEmbed] });
 }
 
 const searchGames = {
@@ -49,7 +49,8 @@ const searchGames = {
     /* Looping through the deals and checking if the deal was published after the last update. */
     // eslint-disable-next-line no-restricted-syntax
     for (const deal of deals) {
-      if (deal.published_date > dlcLastUpdate || dlcLastUpdate === undefined) {
+      console.log(dlcLastUpdate);
+      if (deal.published_date > dlcLastUpdate.dlcLastUpdate || dlcLastUpdate.dlcLastUpdate === null) {
         sendEmbed(deal, interaction);
       }
     }
