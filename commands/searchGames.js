@@ -1,7 +1,6 @@
 import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
-import updateConfigFile from '../tools/updateConfigFile.js';
 
 // open DB
 const db = await open({
@@ -34,7 +33,7 @@ function sendEmbed(deal, interaction) {
   /* It's checking if the gamesChannelID is set. If yes,it will send the embed to the
   channel set in the config.db. If it's not, it will send the embed to the channel where the command
   was executed. */
-  gamesChannelID.gamesChannelID !== null ? interaction.client.channels.cache.get(gamesChannelID.gamesChannelID).send({ embeds: [exampleEmbed] }) : interaction.channel.send({ embeds: [exampleEmbed] });
+  gamesChannelID?.gamesChannelID ? interaction.client.channels.cache.get(gamesChannelID.gamesChannelID).send({ embeds: [exampleEmbed] }) : interaction.channel.send({ embeds: [exampleEmbed] });
 }
 
 const searchGames = {
@@ -49,13 +48,11 @@ const searchGames = {
     /* Looping through the deals and checking if the deal was published after the last update. */
     // eslint-disable-next-line no-restricted-syntax
     for (const deal of deals) {
-      if (deal.published_date > gamesLastUpdate.gamesLastUpdate || gamesLastUpdate.gamesLastUpdate === null) {
+      if (deal.published_date > gamesLastUpdate?.gamesLastUpdate || gamesLastUpdate?.gamesLastUpdate === undefined) {
         sendEmbed(deal, interaction);
       }
     }
-
-    // Update last research date and time
-    await updateConfigFile('gamesLastUpdate', 'strftime(\'%Y-%m-%d %H:%M:%S\', \'now\')');
+    gamesLastUpdate ? await db.run('UPDATE config SET gamesLastUpdate = datetime(\'now\')') : await db.run('INSERT INTO config(gamesLastUpdate) VALUES(datetime(\'now\'))');
 
     // eslint-disable-next-line no-unused-expressions
     totalDeals === 0 ? await interaction.reply('Pas de nouveaux deals depuis la dernière utilisation de la commande') : await interaction.reply(`J'ai trouvé ${totalDeals} jeux actuellement gratuits`);
